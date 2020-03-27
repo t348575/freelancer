@@ -1,0 +1,17 @@
+$height100: 100%;
+ion-grid {
+  width:100%;
+  height: $height100;
+}
+ion-row {
+  height: $height100;
+}
+h1 {
+  font-size: 2em;
+}
+.item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating]{
+  color: red; //label color when focusing
+}
+.item-input .label-md{
+  color: red; //label color
+}

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/browse"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{this.currentJob.name}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button><ion-icon name="share" slot="icon-only"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{this.currentJob.name}}</ion-card-title>
+      <ion-chip [routerLink]="['./', this.currentJob.authorId]">
+        <ion-avatar>
+          <img src="{{this.currentJob.img}}">
+        </ion-avatar>
+        <ion-label>{{this.currentJob.author}}</ion-label>
+        <ion-icon name="open"></ion-icon>
+      </ion-chip>
+      <ion-card-subtitle color="dark">{{this.currentJob.priceHigh>this.currentJob.priceLow?this.currentJob.priceHigh:this.currentJob.priceLow}} - {{this.currentJob.priceHigh>this.currentJob.priceLow?this.currentJob.priceLow:this.currentJob.priceHigh}} {{this.fetchCurrencyService.getSymbol(this.currentJob.currency)}} ({{this.fetchCurrencyService.getName(this.currentJob.currency)}})</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-text color="dark">
+          {{this.currentJob.description}}
+        </ion-text>
+      </ion-item>
+      <ion-list>
+        <ion-card-subtitle color="dark">Requirements</ion-card-subtitle>
+        <ion-chip *ngFor="let skill of this.currentJob.requirements" [attr.color]="getColor()">{{skill}}</ion-chip>
+      </ion-list>
+      <ion-list>
+        <ion-card-subtitle color="dark">Attachments</ion-card-subtitle>
+        <ion-item *ngFor="let attachment of this.currentJob.attachments">{{attachment}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-fab vertical="bottom" style="width: 100%;" class="ion-no-padding ion-no-margin" [hidden]="canPlaceBid">
+  <ion-button expand="block" color="vibrant" (click)="presentModal()">Place Bid</ion-button>
+</ion-fab>
+

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Browse Projects</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="light" [scrollEvents]="true" (ionScroll)="scrollEvent($event)">
+  <ion-card *ngFor="let job of jobs" color="light" [routerLink]="['./jobId', job.id]">
+    <ion-card-header>
+      <ion-card-subtitle>{{job.priceHigh>job.priceLow?job.priceHigh:job.priceLow}} - {{job.priceHigh>job.priceLow?job.priceLow:job.priceHigh}} {{this.fetchCurrencyService.getSymbol(job.currency)}} ({{this.fetchCurrencyService.getName(job.currency)}})</ion-card-subtitle>
+      <ion-card-title>{{job.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{cutString(job.description)}}</ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll threshold="5%" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more jobs">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [hidden]=scrollToTopState (click)="scrollToTop()">
+      <ion-icon name="arrow-round-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

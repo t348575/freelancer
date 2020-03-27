@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" color="dark" animated inputmode="text" autocomplete="on" autocorrect="on" placeholder="Search Jobs"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let job of jobs" color="light" [routerLink]="['./jobId', job.id]">
+    <ion-card-header>
+      <ion-card-subtitle>{{job.priceHigh>job.priceLow?job.priceHigh:job.priceLow}} - {{job.priceHigh>job.priceLow?job.priceLow:job.priceHigh}} </ion-card-subtitle>
+      <ion-card-title>{{job.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{job.description}}</ion-card-content>
+  </ion-card>
+</ion-content>
