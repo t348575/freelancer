@@ -8,5 +8,5 @@
   ```
   ### Connect an android device with USB debugging enabled or start an emulator
   ```
-  npm run build
+  npm run ionic-build
   ```
